@@ -184,14 +184,36 @@ Check Flannel and system pods:
 kubectl get pods -n kube-flannel
 kubectl get pods -n kube-system
 ```
+### Generate Join Command (If Needed)
+
+If you missed the join command, generate it again on the **Master node**:
+
+```bash
+kubeadm token create --print-join-command
+```
 ## 5) ✅ Setup WORKER Node
 
-Go to the **Worker node** and run the **JOIN command** copied from the Master node.
+Copy the generated join command and Go to the **Worker node** and run it on the **Worker node**.
+.
+Paste the join command you got from the Master node and append `--v=5` at the end:
 
+```bash
+sudo kubeadm join <private-ip-of-control-plane>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash> --cri-socket "unix:///run/containerd/containerd.sock" --v=5
+```
+✅ **Note:** When pasting the join command from the Master node:
+
+- Add `sudo` at the beginning of the command
+- Add `--v=5` at the end
+
+Example format:
+
+```bash
+sudo <paste-join-command-here> --v=5
+```
 Example:
 
 ```bash
-sudo kubeadm join <MASTER_PRIVATE_IP>:6443 --token <TOKEN> --discovery-token-ca-cert-hash sha256:<HASH>
+sudo kubeadm join <MASTER_PRIVATE_IP>:6443 --token <TOKEN> --discovery-token-ca-cert-hash sha256:<HASH> --v=5
 ```
 ## 6) ✅ Verify Cluster
 
