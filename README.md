@@ -1,4 +1,6 @@
 # kubeadm-cluster-setup
+A step-by-step guide to set up a Kubernetes cluster using **kubeadm** on **AWS EC2** (1 Master + 1 Worker) with **containerd runtime**, **Flannel CNI**, and required networking/sysctl configuration.
+
 ## ✅ Architecture (What We Will Create)
 
 | Node        | EC2 Instance | Purpose |
