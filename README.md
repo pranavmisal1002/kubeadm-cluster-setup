@@ -224,3 +224,4 @@ Run the following command on the **Master node**:
 ```bash
 kubectl get nodes
 ```
+---
